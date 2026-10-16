@@ -3,14 +3,14 @@ from __future__ import annotations
 
 import time
 
-from PySide6.QtCore import Qt, QTimer
-from PySide6.QtGui import QAction
+from PySide6.QtCore import Qt, QTimer, QUrl
+from PySide6.QtGui import QAction, QDesktopServices
 from PySide6.QtWidgets import (
     QHBoxLayout, QLabel, QLineEdit, QMainWindow, QPushButton, QScrollArea, QSpinBox,
     QTabWidget, QVBoxLayout, QWidget,
 )
 
-from statisticbuddy import __version__
+from statisticbuddy import PROJECT_URL, SUPPORT_URL, __version__
 from statisticbuddy.core import fmt
 from statisticbuddy.core.module import AppContext, TrackerModule
 from statisticbuddy.core.session import SessionController
@@ -86,6 +86,14 @@ class MainWindow(QMainWindow):
         self.on_top.toggled.connect(self._set_on_top)
         view.addAction(self.on_top)
         self._set_on_top(self.on_top.isChecked())
+
+        # Links open in the web browser; the app itself never connects to the internet.
+        help_menu = self.menuBar().addMenu("Help")
+        for text, url in (("♥ Support StatisticBuddy (Buy Me a Coffee)", SUPPORT_URL),
+                          ("Project page and updates (GitHub)", PROJECT_URL)):
+            action = QAction(text, self)
+            action.triggered.connect(lambda _=False, u=url: QDesktopServices.openUrl(QUrl(u)))
+            help_menu.addAction(action)
 
         controller.status.connect(self.status.setText)
         controller.state_changed.connect(self._on_state)

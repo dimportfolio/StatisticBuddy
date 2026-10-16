@@ -1,6 +1,10 @@
+<img src="packaging/avatar.png" alt="StatisticBuddy logo" width="120" align="right">
+
 # StatisticBuddy
 
 A free Windows desktop app that tracks your MapleStory (including Classic World) grinding while you play: EXP per hour and time to level, mesos, ETC loot value, potion use and repot time, and whether a map is meso-positive, with session history.
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-support-FFDD00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/gamedo)
 
 > **Disclaimer:** StatisticBuddy is an unofficial fan tool. It is not affiliated with, endorsed by or supported by Nexon. MapleStory is a trademark of Nexon. The app only reads pixels on your screen (see [How it stays within Nexon's Terms of Service](#how-it-stays-within-nexons-terms-of-service)), but screen reading isn't expressly authorized by Nexon. **Use it at your own risk.**
 
@@ -89,6 +93,10 @@ Register it in `all_modules()` in `statisticbuddy/modules/__init__.py`. Sessions
 ```
 
 Some tests check the readers against real game screenshots in `tests/fixtures/`. Those images contain Nexon's game art, so they aren't published; the tests that need them are skipped when they're missing.
+
+## Support
+
+StatisticBuddy is free and always will be. If it helps your grinding and you'd like to say thanks, you can [**buy me a coffee**](https://buymeacoffee.com/gamedo). It's completely optional and doesn't unlock anything; every feature is free for everyone.
 
 ## License
 

@@ -60,6 +60,15 @@ class SafetyTests(unittest.TestCase):
         self.assertTrue(calls, "expected the finder to use user32")
         self.assertLessEqual(calls, FINDER_ALLOWED_CALLS, f"unexpected Windows calls: {calls - FINDER_ALLOWED_CALLS}")
 
+    def test_only_known_links(self):
+        # The only web addresses are the Help-menu links, opened in the user's browser on click.
+        allowed = {"https://github.com/dimportfolio/StatisticBuddy", "https://buymeacoffee.com/gamedo"}
+        found = set()
+        for path in SRC.rglob("*.py"):
+            for _, code, _ in _code_lines(path):
+                found.update(re.findall(r"https?://[^\s\"')]+", code))
+        self.assertLessEqual(found, allowed, f"unexpected links: {found - allowed}")
+
     def test_pixels_come_from_desktop_capture(self):
         screen = (SRC / "capture" / "screen.py").read_text(encoding="utf-8")
         self.assertIn("import mss", screen)
