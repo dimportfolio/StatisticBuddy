@@ -6,14 +6,14 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from mapletracker.core import session
-from mapletracker.core.module import AppContext, RegionRead
-from mapletracker.core.storage import Settings
-from mapletracker.modules.loot import LootModule, store
-from mapletracker.modules.loot.digits import BUILTIN_TEMPLATES, DigitReader, to_bitmap
-from mapletracker.modules.loot.grid import Catalog, icon_signature, read_grid, slot_rects
-from mapletracker.modules.loot.tracker import LootTracker
-from mapletracker.modules.profit import summarize
+from statisticbuddy.core import session
+from statisticbuddy.core.module import AppContext, RegionRead
+from statisticbuddy.core.storage import Settings
+from statisticbuddy.modules.loot import LootModule, store
+from statisticbuddy.modules.loot.digits import BUILTIN_TEMPLATES, DigitReader, to_bitmap
+from statisticbuddy.modules.loot.grid import Catalog, icon_signature, read_grid, slot_rects
+from statisticbuddy.modules.loot.tracker import LootTracker
+from statisticbuddy.modules.profit import summarize
 
 FIXTURES = Path(__file__).parent / "fixtures"
 # Real game screenshots aren't published (Nexon's game art); these tests run only where they exist.
@@ -136,7 +136,7 @@ class DigitTests(unittest.TestCase):
     def test_reads_through_pickup_highlight(self):
         # MapleStory draws a 1-px orange line on the top row and left column of a slot that
         # just received an item, right over the first digit's outline.
-        from mapletracker.modules.loot.digits import is_highlighted
+        from statisticbuddy.modules.loot.digits import is_highlighted
         reader = DigitReader()
         for text in ("8", "88", "38", "198", "1000"):
             with self.subTest(text=text):
@@ -152,7 +152,7 @@ class DigitTests(unittest.TestCase):
         self.assertEqual(DigitReader().read(slot).value, 188)
 
     def test_banana_icon_is_not_a_highlight(self):
-        from mapletracker.modules.loot.digits import is_highlighted
+        from statisticbuddy.modules.loot.digits import is_highlighted
         slot = self.slot_with("5")
         cv2.circle(slot, (6, 10), 6, (0, 204, 255), -1)   # yellow icon near the left edge
         self.assertFalse(is_highlighted(slot))
@@ -449,8 +449,8 @@ class ProfitTests(unittest.TestCase):
 
 class NetWorthTests(unittest.TestCase):
     def test_net_worth_sums_holdings_and_is_saved_per_session(self):
-        from mapletracker.core.module import TrackerModule
-        from mapletracker.modules.profit import ProfitModule
+        from statisticbuddy.core.module import TrackerModule
+        from statisticbuddy.modules.profit import ProfitModule
 
         class Holding(TrackerModule):
             def __init__(self, label, value):

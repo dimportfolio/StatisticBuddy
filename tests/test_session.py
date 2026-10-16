@@ -1,9 +1,9 @@
 import sqlite3
 import unittest
 
-from mapletracker.core import session
-from mapletracker.modules.exp.tracker import ExpTracker, Sample, Verdict
-from mapletracker.modules.meso.tracker import MesoSample, MesoTracker
+from statisticbuddy.core import session
+from statisticbuddy.modules.exp.tracker import ExpTracker, Sample, Verdict
+from statisticbuddy.modules.meso.tracker import MesoSample, MesoTracker
 
 
 class SessionStoreTests(unittest.TestCase):

@@ -9,7 +9,7 @@ import re
 import unittest
 from pathlib import Path
 
-SRC = Path(__file__).resolve().parent.parent / "mapletracker"
+SRC = Path(__file__).resolve().parent.parent / "statisticbuddy"
 WINDOW_FINDER = SRC / "capture" / "window.py"
 
 # Never allowed anywhere.

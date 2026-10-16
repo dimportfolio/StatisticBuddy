@@ -1,15 +1,21 @@
-# Maple Tracker
+# StatisticBuddy
 
 A free Windows desktop app that tracks your MapleStory (including Classic World) grinding while you play: EXP per hour and time to level, mesos, ETC loot value, potion use and repot time, and whether a map is meso-positive, with session history.
 
-> **Disclaimer:** Maple Tracker is an unofficial fan tool. It is not affiliated with, endorsed by or supported by Nexon. MapleStory is a trademark of Nexon. The app only reads pixels on your screen (see [How it stays within Nexon's Terms of Service](#how-it-stays-within-nexons-terms-of-service)), but screen reading isn't expressly authorized by Nexon. **Use it at your own risk.**
+> **Disclaimer:** StatisticBuddy is an unofficial fan tool. It is not affiliated with, endorsed by or supported by Nexon. MapleStory is a trademark of Nexon. The app only reads pixels on your screen (see [How it stays within Nexon's Terms of Service](#how-it-stays-within-nexons-terms-of-service)), but screen reading isn't expressly authorized by Nexon. **Use it at your own risk.**
 
-## Running it
+## Download
+
+1. Go to the [**Releases**](https://github.com/dimportfolio/StatisticBuddy/releases/latest) page and download `StatisticBuddy-<version>-windows.zip`.
+2. Unzip it anywhere (e.g. your Documents folder) and run **`StatisticBuddy.exe`** inside the folder. Nothing to install.
+3. Windows may show "Windows protected your PC" because the app isn't code-signed. Click **More info → Run anyway**.
+
+### Running from source (developers)
 
 1. Install **Python 3.12** from python.org and tick "Add python.exe to PATH".
 2. Double-click `run.bat`. The first run sets up the environment, which takes a few minutes.
 
-Data is stored in `%LOCALAPPDATA%\MapleTracker` (`tracker.db`, `settings.json` and the Python environment in `venv`).
+To build the `.exe` yourself, run `build_exe.ps1` (see the comments at its top).
 
 ## Using it
 
@@ -41,11 +47,11 @@ Mesos: increases count as gained; spending (shops, repairs) is tracked separatel
 
 ## Where data is stored
 
-Everything stays on your PC, in `%LOCALAPPDATA%\MapleTracker`:
+Everything stays on your PC, in `%LOCALAPPDATA%\StatisticBuddy` (before the rename it was `MapleTracker`; your data is copied over automatically and the old folder is kept as a backup):
 
 - `tracker.db`: sessions, every reading taken (EXP, mesos, potion counts), your loot item list (name, NPC price and a small icon image per item) and per-session results.
 - `settings.json`: the regions you selected, read interval, grid size, potion names and prices.
-- `venv\`: the app's Python environment.
+- `app.log`: errors, if any, to help diagnose problems.
 
 Screenshots are **not** saved. Each read takes one screenshot of the game in memory, reads the selected regions from it and discards it. The only images kept are the small item icons shown in the Loot table.
 
@@ -67,19 +73,19 @@ MapleStory Classic World uses the same Terms and account as MapleStory, so a ban
 
 ## Adding new trackers
 
-Each feature is a module in `mapletracker/modules/` (see `exp/` and `meso/`). A module is a `TrackerModule` subclass (`core/module.py`) that:
+Each feature is a module in `statisticbuddy/modules/` (see `exp/` and `meso/`). A module is a `TrackerModule` subclass (`core/module.py`) that:
 
 - declares the screen `regions` it reads (they appear on the Regions tab automatically)
 - turns OCR text into numbers in `on_read()`
 - creates its own tables in `init_schema()` and returns a Live panel from `create_panel()`
 - adds History columns via `history_headers` / `history_values()`
 
-Register it in `all_modules()` in `mapletracker/modules/__init__.py`. Sessions, the game screenshot, OCR and storage are shared.
+Register it in `all_modules()` in `statisticbuddy/modules/__init__.py`. Sessions, the game screenshot, OCR and storage are shared.
 
 ## Tests
 
 ```
-%LOCALAPPDATA%\MapleTracker\venv\Scripts\python -m unittest discover -s tests -t .
+%LOCALAPPDATA%\StatisticBuddy\venv\Scripts\python -m unittest discover -s tests -t .
 ```
 
 Some tests check the readers against real game screenshots in `tests/fixtures/`. Those images contain Nexon's game art, so they aren't published; the tests that need them are skipped when they're missing.

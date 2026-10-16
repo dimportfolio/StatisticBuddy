@@ -2,12 +2,12 @@ import unittest
 
 import numpy as np
 
-from mapletracker.capture.game import Frame, RelRegion
-from mapletracker.capture.screen import Region
-from mapletracker.capture.window import GameWindow
-from mapletracker.modules.exp.tracker import Verdict
-from mapletracker.modules.meso.parser import parse_meso_text
-from mapletracker.modules.meso.tracker import MesoSample, MesoTracker
+from statisticbuddy.capture.game import Frame, RelRegion
+from statisticbuddy.capture.screen import Region
+from statisticbuddy.capture.window import GameWindow
+from statisticbuddy.modules.exp.tracker import Verdict
+from statisticbuddy.modules.meso.parser import parse_meso_text
+from statisticbuddy.modules.meso.tracker import MesoSample, MesoTracker
 
 
 class MesoParserTests(unittest.TestCase):

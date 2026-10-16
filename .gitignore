@@ -8,7 +8,7 @@ dist/
 *.spec
 *.egg-info/
 
-# Local data and logs (the app keeps these in %LOCALAPPDATA%\MapleTracker, but just in case)
+# Local data and logs (the app keeps these in %LOCALAPPDATA%\StatisticBuddy, but just in case)
 *.db
 *.db-shm
 *.db-wal
@@ -28,3 +28,6 @@ tests/fixtures/*.png
 .claude/
 Thumbs.db
 desktop.ini
+
+# Build output log
+build_log.txt

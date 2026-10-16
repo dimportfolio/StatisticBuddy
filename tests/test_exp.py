@@ -1,7 +1,7 @@
 import unittest
 
-from mapletracker.modules.exp.parser import ExpReading, parse_exp_text
-from mapletracker.modules.exp.tracker import ExpTracker, Sample, Verdict
+from statisticbuddy.modules.exp.parser import ExpReading, parse_exp_text
+from statisticbuddy.modules.exp.tracker import ExpTracker, Sample, Verdict
 
 
 class ParserTests(unittest.TestCase):

@@ -6,13 +6,13 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from mapletracker.core import session
-from mapletracker.core.module import AppContext, RegionRead
-from mapletracker.core.storage import Settings
-from mapletracker.modules.loot.digits import DigitReader
-from mapletracker.modules.potions import PotionModule
-from mapletracker.modules.potions.tracker import PotionTracker
-from mapletracker.modules.profit import summarize
+from statisticbuddy.core import session
+from statisticbuddy.core.module import AppContext, RegionRead
+from statisticbuddy.core.storage import Settings
+from statisticbuddy.modules.loot.digits import DigitReader
+from statisticbuddy.modules.potions import PotionModule
+from statisticbuddy.modules.potions.tracker import PotionTracker
+from statisticbuddy.modules.profit import summarize
 
 FIXTURE = Path(__file__).parent / "fixtures" / "quickslot_classic.png"
 # Real game screenshots aren't published (Nexon's game art); these tests run only where they exist.
@@ -151,7 +151,7 @@ class PotionModuleTests(unittest.TestCase):
         self.m.tracker.feed({"pot_1": 50}, set(), 10)
         self.m.tracker.feed({"pot_1": 50}, set(), 20)
         self.m._save()
-        from mapletracker.modules.potions import store as pstore
+        from statisticbuddy.modules.potions import store as pstore
         (row,) = pstore.session_rows(self.m.ctx.db, self.sid)
         self.assertEqual((row["start_count"], row["end_count"], row["used"]), (60, 50, 10))
         fresh = PotionModule()
