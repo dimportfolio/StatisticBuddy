@@ -1,0 +1,4 @@
+PySide6-Essentials>=6.6,<7
+mss>=9.0
+numpy>=1.26
+rapidocr_onnxruntime==1.4.4

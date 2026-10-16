@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+build/
+dist/
+*.spec
+*.egg-info/
+
+# Local data and logs (the app keeps these in %LOCALAPPDATA%\MapleTracker, but just in case)
+*.db
+*.db-shm
+*.db-wal
+*.log
+settings.json
+
+# Screenshots of the game used by some tests: game art belongs to Nexon, keep it local
+tests/fixtures/*.png
+
+# Scratch files in the project root only (not __init__.py / __main__.py)
+/_*.py
+/_*.png
+
+# Editors / OS
+.vscode/
+.idea/
+.claude/
+Thumbs.db
+desktop.ini

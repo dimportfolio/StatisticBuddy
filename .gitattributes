@@ -1,0 +1,4 @@
+# Normalise line endings in the repository; .bat files keep Windows line endings.
+* text=auto
+*.bat text eol=crlf
+*.png binary
